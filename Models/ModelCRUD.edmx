@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CRUD1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="POLIZA">
+          <Key>
+            <PropertyRef Name="ID_POLIZA" />
+          </Key>
+          <Property Name="ID_POLIZA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="APATERNO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AMATERNO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AUTO_MARCA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AUTO_MODELO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AUTO_ANIO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DANIOS" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="SGM" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="VIDA" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="FECHA_INICIO" Type="date" Nullable="false" />
+          <Property Name="FECHA_VIGENCIA" Type="date" Nullable="false" />
+          <Property Name="COSTO" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="PORC_COASEGURADO" Type="decimal" Precision="1" Scale="1" Nullable="false" />
+          <Property Name="PORC_DEDUCIBLE" Type="decimal" Precision="1" Scale="1" Nullable="false" />
+          <Property Name="COBERTURA" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="CRUD1ModelStoreContainer">
+          <EntitySet Name="POLIZA" EntityType="Self.POLIZA" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CRUD1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="POLIZA">
+          <Key>
+            <PropertyRef Name="ID_POLIZA" />
+          </Key>
+          <Property Name="ID_POLIZA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AMATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AUTO_MARCA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AUTO_MODELO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AUTO_ANIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DANIOS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SGM" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="VIDA" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="FECHA_INICIO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FECHA_VIGENCIA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="COSTO" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="PORC_COASEGURADO" Type="Decimal" Precision="1" Scale="1" Nullable="false" />
+          <Property Name="PORC_DEDUCIBLE" Type="Decimal" Precision="1" Scale="1" Nullable="false" />
+          <Property Name="COBERTURA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="CRUD1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="POLIZA" EntityType="Self.POLIZA" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CRUD1ModelStoreContainer" CdmEntityContainer="CRUD1Entities">
+          <EntitySetMapping Name="POLIZA">
+            <EntityTypeMapping TypeName="CRUD1Model.POLIZA">
+              <MappingFragment StoreEntitySet="POLIZA">
+                <ScalarProperty Name="ID_POLIZA" ColumnName="ID_POLIZA" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APATERNO" ColumnName="APATERNO" />
+                <ScalarProperty Name="AMATERNO" ColumnName="AMATERNO" />
+                <ScalarProperty Name="AUTO_MARCA" ColumnName="AUTO_MARCA" />
+                <ScalarProperty Name="AUTO_MODELO" ColumnName="AUTO_MODELO" />
+                <ScalarProperty Name="AUTO_ANIO" ColumnName="AUTO_ANIO" />
+                <ScalarProperty Name="DANIOS" ColumnName="DANIOS" />
+                <ScalarProperty Name="SGM" ColumnName="SGM" />
+                <ScalarProperty Name="VIDA" ColumnName="VIDA" />
+                <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
+                <ScalarProperty Name="FECHA_VIGENCIA" ColumnName="FECHA_VIGENCIA" />
+                <ScalarProperty Name="COSTO" ColumnName="COSTO" />
+                <ScalarProperty Name="PORC_COASEGURADO" ColumnName="PORC_COASEGURADO" />
+                <ScalarProperty Name="PORC_DEDUCIBLE" ColumnName="PORC_DEDUCIBLE" />
+                <ScalarProperty Name="COBERTURA" ColumnName="COBERTURA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

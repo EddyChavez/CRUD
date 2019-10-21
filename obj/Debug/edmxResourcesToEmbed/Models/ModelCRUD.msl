@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CRUD1ModelStoreContainer" CdmEntityContainer="CRUD1Entities">
+    <EntitySetMapping Name="POLIZA">
+      <EntityTypeMapping TypeName="CRUD1Model.POLIZA">
+        <MappingFragment StoreEntitySet="POLIZA">
+          <ScalarProperty Name="ID_POLIZA" ColumnName="ID_POLIZA" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="APATERNO" ColumnName="APATERNO" />
+          <ScalarProperty Name="AMATERNO" ColumnName="AMATERNO" />
+          <ScalarProperty Name="AUTO_MARCA" ColumnName="AUTO_MARCA" />
+          <ScalarProperty Name="AUTO_MODELO" ColumnName="AUTO_MODELO" />
+          <ScalarProperty Name="AUTO_ANIO" ColumnName="AUTO_ANIO" />
+          <ScalarProperty Name="DANIOS" ColumnName="DANIOS" />
+          <ScalarProperty Name="SGM" ColumnName="SGM" />
+          <ScalarProperty Name="VIDA" ColumnName="VIDA" />
+          <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
+          <ScalarProperty Name="FECHA_VIGENCIA" ColumnName="FECHA_VIGENCIA" />
+          <ScalarProperty Name="COSTO" ColumnName="COSTO" />
+          <ScalarProperty Name="PORC_COASEGURADO" ColumnName="PORC_COASEGURADO" />
+          <ScalarProperty Name="PORC_DEDUCIBLE" ColumnName="PORC_DEDUCIBLE" />
+          <ScalarProperty Name="COBERTURA" ColumnName="COBERTURA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

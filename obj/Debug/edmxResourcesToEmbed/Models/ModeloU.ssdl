@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CRUDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AUTOS">
+    <Key>
+      <PropertyRef Name="ID_AUTO" />
+    </Key>
+    <Property Name="ID_AUTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MARCA" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="MODELO" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ANIO" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CLIENTES">
+    <Key>
+      <PropertyRef Name="ID_CLIENTE" />
+    </Key>
+    <Property Name="ID_CLIENTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="APE_PATERNO" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="APE_MATERNO" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="COBERTURA">
+    <Key>
+      <PropertyRef Name="ID_COBERTURA" />
+    </Key>
+    <Property Name="ID_COBERTURA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="POLIZA">
+    <Key>
+      <PropertyRef Name="ID_POLIZA" />
+    </Key>
+    <Property Name="ID_POLIZA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_CLIENTE" Type="int" Nullable="false" />
+    <Property Name="FK_AUTO" Type="int" Nullable="false" />
+    <Property Name="DANIOS" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="SGM" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="VIDA" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="FECHA_INICIO" Type="date" Nullable="false" />
+    <Property Name="FECHA_VIGENCIA" Type="date" Nullable="false" />
+    <Property Name="COSTO" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="PORC_COASEGURADO" Type="decimal" Precision="1" Scale="1" Nullable="false" />
+    <Property Name="PORC_DEDUCIBLE" Type="decimal" Precision="1" Scale="1" Nullable="false" />
+    <Property Name="FK_COBERTURA" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'CRUD.dbo.VistaUnion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="VistaUnion">
+    <Key>
+      <PropertyRef Name="ID_POLIZA" />
+      <PropertyRef Name="NOMBRE" />
+      <PropertyRef Name="APE_PATERNO" />
+      <PropertyRef Name="APE_MATERNO" />
+      <PropertyRef Name="MARCA" />
+      <PropertyRef Name="MODELO" />
+      <PropertyRef Name="ANIO" />
+      <PropertyRef Name="DANIOS" />
+      <PropertyRef Name="SGM" />
+      <PropertyRef Name="VIDA" />
+      <PropertyRef Name="FECHA_INICIO" />
+      <PropertyRef Name="FECHA_VIGENCIA" />
+      <PropertyRef Name="COSTO" />
+      <PropertyRef Name="PORC_COASEGURADO" />
+      <PropertyRef Name="PORC_DEDUCIBLE" />
+      <PropertyRef Name="Expr1" />
+    </Key>
+    <Property Name="ID_POLIZA" Type="int" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="APE_PATERNO" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="APE_MATERNO" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="MARCA" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="MODELO" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ANIO" Type="date" Nullable="false" />
+    <Property Name="DANIOS" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="SGM" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="VIDA" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="FECHA_INICIO" Type="date" Nullable="false" />
+    <Property Name="FECHA_VIGENCIA" Type="date" Nullable="false" />
+    <Property Name="COSTO" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="PORC_COASEGURADO" Type="decimal" Precision="1" Scale="1" Nullable="false" />
+    <Property Name="PORC_DEDUCIBLE" Type="decimal" Precision="1" Scale="1" Nullable="false" />
+    <Property Name="Expr1" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_POLIZA_AUTOS">
+    <End Role="AUTOS" Type="Self.AUTOS" Multiplicity="1" />
+    <End Role="POLIZA" Type="Self.POLIZA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AUTOS">
+        <PropertyRef Name="ID_AUTO" />
+      </Principal>
+      <Dependent Role="POLIZA">
+        <PropertyRef Name="FK_AUTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_POLIZA_CLIENTES">
+    <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="1" />
+    <End Role="POLIZA" Type="Self.POLIZA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENTES">
+        <PropertyRef Name="ID_CLIENTE" />
+      </Principal>
+      <Dependent Role="POLIZA">
+        <PropertyRef Name="FK_CLIENTE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_POLIZA_COBERTURA">
+    <End Role="COBERTURA" Type="Self.COBERTURA" Multiplicity="1" />
+    <End Role="POLIZA" Type="Self.POLIZA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COBERTURA">
+        <PropertyRef Name="ID_COBERTURA" />
+      </Principal>
+      <Dependent Role="POLIZA">
+        <PropertyRef Name="FK_COBERTURA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CRUDModelStoreContainer">
+    <EntitySet Name="AUTOS" EntityType="Self.AUTOS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CLIENTES" EntityType="Self.CLIENTES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="COBERTURA" EntityType="Self.COBERTURA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="POLIZA" EntityType="Self.POLIZA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VistaUnion" EntityType="Self.VistaUnion" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VistaUnion].[ID_POLIZA] AS [ID_POLIZA], 
+    [VistaUnion].[NOMBRE] AS [NOMBRE], 
+    [VistaUnion].[APE_PATERNO] AS [APE_PATERNO], 
+    [VistaUnion].[APE_MATERNO] AS [APE_MATERNO], 
+    [VistaUnion].[MARCA] AS [MARCA], 
+    [VistaUnion].[MODELO] AS [MODELO], 
+    [VistaUnion].[ANIO] AS [ANIO], 
+    [VistaUnion].[DANIOS] AS [DANIOS], 
+    [VistaUnion].[SGM] AS [SGM], 
+    [VistaUnion].[VIDA] AS [VIDA], 
+    [VistaUnion].[FECHA_INICIO] AS [FECHA_INICIO], 
+    [VistaUnion].[FECHA_VIGENCIA] AS [FECHA_VIGENCIA], 
+    [VistaUnion].[COSTO] AS [COSTO], 
+    [VistaUnion].[PORC_COASEGURADO] AS [PORC_COASEGURADO], 
+    [VistaUnion].[PORC_DEDUCIBLE] AS [PORC_DEDUCIBLE], 
+    [VistaUnion].[Expr1] AS [Expr1]
+    FROM [dbo].[VistaUnion] AS [VistaUnion]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_POLIZA_AUTOS" Association="Self.FK_POLIZA_AUTOS">
+      <End Role="AUTOS" EntitySet="AUTOS" />
+      <End Role="POLIZA" EntitySet="POLIZA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_POLIZA_CLIENTES" Association="Self.FK_POLIZA_CLIENTES">
+      <End Role="CLIENTES" EntitySet="CLIENTES" />
+      <End Role="POLIZA" EntitySet="POLIZA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_POLIZA_COBERTURA" Association="Self.FK_POLIZA_COBERTURA">
+      <End Role="COBERTURA" EntitySet="COBERTURA" />
+      <End Role="POLIZA" EntitySet="POLIZA" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PolizaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="POLIZA">
+    <Key>
+      <PropertyRef Name="ID_POLIZA" />
+    </Key>
+    <Property Name="ID_POLIZA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_CLIENTE" Type="int" Nullable="false" />
+    <Property Name="FK_AUTO" Type="int" Nullable="false" />
+    <Property Name="DANIOS" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="SGM" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="VIDA" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="FECHA_INICIO" Type="date" Nullable="false" />
+    <Property Name="FECHA_VIGENCIA" Type="date" Nullable="false" />
+    <Property Name="COSTO" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="PORC_COASEGURADO" Type="decimal" Precision="1" Scale="1" Nullable="false" />
+    <Property Name="PORC_DEDUCIBLE" Type="decimal" Precision="1" Scale="1" Nullable="false" />
+    <Property Name="FK_COBERTURA" Type="int" />
+  </EntityType>
+  <EntityContainer Name="PolizaModelStoreContainer">
+    <EntitySet Name="POLIZA" EntityType="Self.POLIZA" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

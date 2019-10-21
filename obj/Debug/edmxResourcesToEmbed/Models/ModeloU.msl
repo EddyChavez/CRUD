@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CRUDModelStoreContainer" CdmEntityContainer="CRUDEntities">
+    <EntitySetMapping Name="AUTOS">
+      <EntityTypeMapping TypeName="CRUDModel.AUTOS">
+        <MappingFragment StoreEntitySet="AUTOS">
+          <ScalarProperty Name="ID_AUTO" ColumnName="ID_AUTO" />
+          <ScalarProperty Name="MARCA" ColumnName="MARCA" />
+          <ScalarProperty Name="MODELO" ColumnName="MODELO" />
+          <ScalarProperty Name="ANIO" ColumnName="ANIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CLIENTES">
+      <EntityTypeMapping TypeName="CRUDModel.CLIENTES">
+        <MappingFragment StoreEntitySet="CLIENTES">
+          <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="APE_PATERNO" ColumnName="APE_PATERNO" />
+          <ScalarProperty Name="APE_MATERNO" ColumnName="APE_MATERNO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COBERTURA">
+      <EntityTypeMapping TypeName="CRUDModel.COBERTURA">
+        <MappingFragment StoreEntitySet="COBERTURA">
+          <ScalarProperty Name="ID_COBERTURA" ColumnName="ID_COBERTURA" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="POLIZA">
+      <EntityTypeMapping TypeName="CRUDModel.POLIZA">
+        <MappingFragment StoreEntitySet="POLIZA">
+          <ScalarProperty Name="ID_POLIZA" ColumnName="ID_POLIZA" />
+          <ScalarProperty Name="DANIOS" ColumnName="DANIOS" />
+          <ScalarProperty Name="SGM" ColumnName="SGM" />
+          <ScalarProperty Name="VIDA" ColumnName="VIDA" />
+          <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
+          <ScalarProperty Name="FECHA_VIGENCIA" ColumnName="FECHA_VIGENCIA" />
+          <ScalarProperty Name="COSTO" ColumnName="COSTO" />
+          <ScalarProperty Name="PORC_COASEGURADO" ColumnName="PORC_COASEGURADO" />
+          <ScalarProperty Name="PORC_DEDUCIBLE" ColumnName="PORC_DEDUCIBLE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VistaUnion">
+      <EntityTypeMapping TypeName="CRUDModel.VistaUnion">
+        <MappingFragment StoreEntitySet="VistaUnion">
+          <ScalarProperty Name="ID_POLIZA" ColumnName="ID_POLIZA" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="APE_PATERNO" ColumnName="APE_PATERNO" />
+          <ScalarProperty Name="APE_MATERNO" ColumnName="APE_MATERNO" />
+          <ScalarProperty Name="MARCA" ColumnName="MARCA" />
+          <ScalarProperty Name="MODELO" ColumnName="MODELO" />
+          <ScalarProperty Name="ANIO" ColumnName="ANIO" />
+          <ScalarProperty Name="DANIOS" ColumnName="DANIOS" />
+          <ScalarProperty Name="SGM" ColumnName="SGM" />
+          <ScalarProperty Name="VIDA" ColumnName="VIDA" />
+          <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
+          <ScalarProperty Name="FECHA_VIGENCIA" ColumnName="FECHA_VIGENCIA" />
+          <ScalarProperty Name="COSTO" ColumnName="COSTO" />
+          <ScalarProperty Name="PORC_COASEGURADO" ColumnName="PORC_COASEGURADO" />
+          <ScalarProperty Name="PORC_DEDUCIBLE" ColumnName="PORC_DEDUCIBLE" />
+          <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_POLIZA_AUTOS" TypeName="CRUDModel.FK_POLIZA_AUTOS" StoreEntitySet="POLIZA">
+      <EndProperty Name="AUTOS">
+        <ScalarProperty Name="ID_AUTO" ColumnName="FK_AUTO" />
+      </EndProperty>
+      <EndProperty Name="POLIZA">
+        <ScalarProperty Name="ID_POLIZA" ColumnName="ID_POLIZA" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_POLIZA_CLIENTES" TypeName="CRUDModel.FK_POLIZA_CLIENTES" StoreEntitySet="POLIZA">
+      <EndProperty Name="CLIENTES">
+        <ScalarProperty Name="ID_CLIENTE" ColumnName="FK_CLIENTE" />
+      </EndProperty>
+      <EndProperty Name="POLIZA">
+        <ScalarProperty Name="ID_POLIZA" ColumnName="ID_POLIZA" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_POLIZA_COBERTURA" TypeName="CRUDModel.FK_POLIZA_COBERTURA" StoreEntitySet="POLIZA">
+      <EndProperty Name="COBERTURA">
+        <ScalarProperty Name="ID_COBERTURA" ColumnName="FK_COBERTURA" />
+      </EndProperty>
+      <EndProperty Name="POLIZA">
+        <ScalarProperty Name="ID_POLIZA" ColumnName="ID_POLIZA" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CRUD1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="POLIZA">
+    <Key>
+      <PropertyRef Name="ID_POLIZA" />
+    </Key>
+    <Property Name="ID_POLIZA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="APATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AMATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AUTO_MARCA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AUTO_MODELO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AUTO_ANIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DANIOS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SGM" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="VIDA" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="FECHA_INICIO" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FECHA_VIGENCIA" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="COSTO" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="PORC_COASEGURADO" Type="Decimal" Precision="1" Scale="1" Nullable="false" />
+    <Property Name="PORC_DEDUCIBLE" Type="Decimal" Precision="1" Scale="1" Nullable="false" />
+    <Property Name="COBERTURA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="CRUD1Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="POLIZA" EntityType="Self.POLIZA" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,350 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+	<meta charset="utf-8" />
+    <script>
+        var App = angular.module("myApp", []);
+        var result = true;
+
+        App.controller("PolizaCtrl", function ($scope, $http) {
+
+            GetAll();
+            function GetAll(){
+                $http.get('/api/POLIZA').then(function(response){$scope.Poliza=response.data,function(){alert("Error al obtener")}})
+            }
+            $scope.InsertarPoliza = function (Poliza) {
+                var dataObj = {
+                    NOMBRE: Poliza.NOMBRE,
+                    APATERNO: Poliza.APATERNO,
+                    AMATERNO: Poliza.AMATERNO,
+                    AUTO_MARCA: Poliza.AUTO_MARCA,
+                    AUTO_MODELO: Poliza.AUTO_MODELO,
+                    AUTO_ANIO: Poliza.AUTO_ANIO,
+                    DANIOS: Poliza.DANIOS,
+                    SGM: Poliza.SGM,
+                    VIDA: Poliza.VIDA,
+                    FECHA_INICIO: Poliza.FECHA_INICIO,
+                    FECHA_VIGENCIA: Poliza.FECHA_VIGENCIA,
+                    COSTO: Poliza.COSTO,
+                    PORC_COASEGURADO: Poliza.PORC_COASEGURADO,
+                    PORC_DEDUCIBLE: Poliza.PORC_DEDUCIBLE,
+                    COBERTURA: Poliza.COBERTURA
+                }
+                console.log(dataObj);
+                console.log(Poliza);
+                $http.post('api/POLIZA', dataObj).then(function (resp) { alert("Registro Exitoso!"); GetAll(); }, function () { alert("Error al insertar"); });
+            }
+            $scope.ObtenerPoliza = function (id) {
+                $scope.DetallePoliza = { ID_POLIZA: "",
+                    NOMBRE: "", APATERNO: "", AMATERNO: "", AUTO_MARCA: "", AUTO_MARCA: "", AUTO_MODELO: "", AUTO_ANIO: "", DANIOS: "", SGM: ""
+                , VIDA: "", FECHA_INICIO: "", FECHA_VIGENCIA: "", COSTO: "", PORC_COASEGURADO: "", PORC_DEDUCIBLE: "", COBERTURA: ""
+                }
+                $http.get('api/POLIZA/' + id).then(function (response) {
+                    $scope.DetallePoliza = response.data;
+                    //Poliza = response.data;
+                    //alert(Poliza.NOMBRE)
+                    console.log($scope.ActualizarPoliza)
+                    result = !result;
+                    myFunction();
+                }, function () {
+                    alert("ERROR! AL OBTENER POR ID");
+                });
+            }
+            $scope.Borrar = function (id) {
+                var x = confirm("¿QUIERES BORRAR EL REGISTRO "+ id +" ?")
+                if(x)
+                    $http.delete('api/POLIZA/' + id).then(function (response) {
+                        
+                        alert("ELIMINADO!");
+                        GetAll();
+
+                    }, function () {
+                        alert("ERROR! NO SE ELIMINO");
+                    });
+                else
+                 alert("OPERACION BORRAR CANCELADA")
+
+            }
+            $scope.myFunction = function () {
+                return result;
+            }
+            $scope.ActualizarPoliza = function (DetallePoliza) {
+
+                var x = confirm("¿QUIERES ACTUALIZAR LA POLIZA CON ID: " + DetallePoliza.ID_POLIZA + " ?")
+                if (x)
+
+                    $http.put('api/POLIZA/' + DetallePoliza.ID_POLIZA, DetallePoliza).then(function () {
+                        alert("EXITO! POLIZA ACTUALIZADA")
+                        result = !result;
+                        GetAll()
+                    }, function () {
+                        alert("ERROR! AL ACTUALIZAR POLIZA")
+                    });
+                else
+                    alert("OPERACION ACTUALIZAR CANCELADA")
+            }
+
+        })
+
+    </script>
+</head>
+
+<body ng-app="myApp" ng-controller="PolizaCtrl">
+        <table class="table table-responsive  table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">NOMBRE</th>
+                    <th scope="col">APATERNO</th>
+                    <th scope="col">AMATERNO</th>
+                    <th scope="col">MARCA</th>
+                    <th scope="col">MODELO</th>
+                    <th scope="col">AÑO</th>
+                    <th scope="col">DAÑO</th>
+                    <th scope="col">SGM</th>
+                    <th scope="col">VIDA</th>
+                    <th scope="col">INICIO</th>
+                    <th scope="col">VIGENCIA</th>
+                    <th scope="col">COSTO</th>
+                    <th scope="col">%COASE</th>
+                    <th scope="col">%DEDUc</th>
+                    <th scope="col">COBERTURA</th>
+                    <th scope="col">ACCIONES</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in Poliza">
+                    <td>{{item.ID_POLIZA}}</td>
+                    <td>{{item.NOMBRE}}</td>
+                    <td>{{item.APATERNO}}</td>
+                    <td>{{item.AMATERNO}}</td>
+                    <td>{{item.AUTO_MARCA}}</td>
+                    <td>{{item.AUTO_MODELO}}</td>
+                    <td>{{item.AUTO_ANIO}}</td>
+                    <td>{{item.DANIOS}}</td>
+                    <td>{{item.SGM}}</td>
+                    <td>{{item.VIDA}}</td>
+                    <td>{{item.FECHA_INICIO}}</td>
+                    <td>{{item.FECHA_VIGENCIA}}</td>
+                    <td>{{item.COSTO}}</td>
+                    <td>{{item.PORC_COASEGURADO}}</td>
+                    <td>{{item.PORC_DEDUCIBLE}}</td>
+                    <td>{{item.COBERTURA}}</td>
+                    <td>
+                        <input type="button" value="Editar"  class="btn btn-warning" ng-click="ObtenerPoliza(item.ID_POLIZA); myFunction()"/>
+                        <input type="button" value="Borrar"  class="btn btn-danger" ng-click="Borrar(item.ID_POLIZA)"/>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    <div class="container" ng-if="myFunction()">
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Nombre(s)</label>
+                    <input type="text" ng-model="Poliza.NOMBRE" class="form-control"  placeholder="NOMBRE">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Primer Apellido</label>
+                    <input type="text" ng-model="Poliza.APATERNO" class="form-control"  placeholder="PRIEMR APELLDO">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Segundo Apellido</label>
+                    <input type="text" ng-model="Poliza.AMATERNO" class="form-control"  placeholder="SEGUNDO APELLIDO">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Marca</label>
+                    <input type="text" ng-model="Poliza.AUTO_MARCA" class="form-control"  placeholder="MARCA">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Modelo</label>
+                    <input type="text" ng-model="Poliza.AUTO_MODELO" class="form-control"  placeholder="MODELO">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Año</label>
+                    <select class="form-control" ng-model="Poliza.AUTO_ANIO">
+                        <option value="2017">2017</option>
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                    </select> 
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Daño</label>
+                    <input type="text" ng-model="Poliza.DANIOS" class="form-control"  placeholder="DAÑO">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>SGM</label>
+                    <input type="text" ng-model="Poliza.SGM" class="form-control"  placeholder="SGM">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Vida</label>
+                    <input type="text" ng-model="Poliza.VIDA" class="form-control"  placeholder="VIDA">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Fecha inicio</label>
+                    <input type="date" ng-model="Poliza.FECHA_INICIO" class="form-control">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Vigencia</label>
+                    <input type="date" ng-model="Poliza.FECHA_VIGENCIA" class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Costo</label>
+                    <input type="number" ng-model="Poliza.COSTO" class="form-control"  placeholder="text">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>$ Coasegurado</label>
+                    <select class="form-control" ng-model="Poliza.PORC_COASEGURADO">
+                        <option value="0.1">0.1</option>
+                        <option value="0.1">0.2</option>
+                    </select> 
+                </div>
+                <div class="form-group col-md-6">
+                    <label>% Deducible</label>
+                    <select class="form-control" ng-model="Poliza.PORC_DEDUCIBLE">
+                        <option value="0.1">0.1</option>
+                        <option value="0.1">0.2</option>
+                    </select> 
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Cobertura</label>
+                    <select class="form-control" ng-model="Poliza.COBERTURA">
+                        <option value="PREMIUM">PREMIUM</option>
+                        <option value="ESENCIAL">ESENCIAL</option>
+                        <option value="BASICA">BASICA</option>
+                    </select> 
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Acciones</label>
+                         <button type="button" ng-click="InsertarPoliza(Poliza)" class="btn btn-primary form-control" value="InsertaPol">Registrar</button>
+
+                    </div>
+            </div>
+        </form>
+    </div>
+    <div class="container" ng-if="!myFunction()">
+            <h2>ID: {{DetallePoliza.ID_POLIZA}}</h2>
+            <form>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Nombre(s)</label>
+                    <input type="text" ng-model="DetallePoliza.NOMBRE" class="form-control" placeholder="NOMBRE">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Primer Apellido</label>
+                    <input type="text" ng-model="DetallePoliza.APATERNO" class="form-control" placeholder="PRIMER APELLDO">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Segundo Apellido</label>
+                    <input type="text" ng-model="DetallePoliza.AMATERNO" class="form-control" placeholder="SEGUNDO APELLIDO">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Marca</label>
+                    <input type="text" ng-model="DetallePoliza.AUTO_MARCA" class="form-control" placeholder="MARCA">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Modelo</label>
+                    <input type="text" ng-model="DetallePoliza.AUTO_MODELO" class="form-control" placeholder="MODELO">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Año</label>
+                    <select class="form-control" ng-model="DetallePoliza.AUTO_ANIO">
+                        <option value="2017">2017</option>
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Daño</label>
+                    <input type="text" ng-model="DetallePoliza.DANIOS" class="form-control" placeholder="DAÑO">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>SGM</label>
+                    <input type="text" ng-model="DetallePoliza.SGM" class="form-control" placeholder="SGM">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Vida</label>
+                    <input type="text" ng-model="DetallePoliza.VIDA" class="form-control" placeholder="VIDA">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Fecha inicio</label>
+                    <input type="date" ng-model="DetallePoliza.FECHA_INICIO" class="form-control">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Vigencia</label>
+                    <input type="date" ng-model="DetallePoliza.FECHA_VIGENCIA" class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Costo</label>
+                    <input type="number" ng-model="DetallePoliza.COSTO" class="form-control" placeholder="text">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>% Coasegurado</label>
+                    <select class="form-control" ng-model="DetallePoliza.PORC_COASEGURADO">
+                        <option value="0.1">0.1</option>
+                        <option value="0.1">0.2</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>% Deducible</label>
+                    <select class="form-control" ng-model="DetallePoliza.PORC_DEDUCIBLE">
+                        <option value="0.1">0.1</option>
+                        <option value="0.1">0.2</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Cobertura</label>
+                    <select class="form-control" ng-model="DetallePoliza.COBERTURA">
+                        <option value="PREMIUM">PREMIUM</option>
+                        <option value="ESENCIAL">ESENCIAL</option>
+                        <option value="BASICA">BASICA</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Acciones</label>
+                    <button type="button" ng-click="ActualizarPoliza(DetallePoliza)" class="btn btn-primary form-control" value="ActualizaPol">Actualizar</button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

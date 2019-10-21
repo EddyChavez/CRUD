@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CRUDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AUTOS">
+    <Key>
+      <PropertyRef Name="ID_AUTO" />
+    </Key>
+    <Property Name="ID_AUTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MARCA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MODELO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ANIO" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="POLIZA" Relationship="Self.FK_POLIZA_AUTOS" FromRole="AUTOS" ToRole="POLIZA" />
+  </EntityType>
+  <EntityType Name="CLIENTES">
+    <Key>
+      <PropertyRef Name="ID_CLIENTE" />
+    </Key>
+    <Property Name="ID_CLIENTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="APE_PATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="APE_MATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="POLIZA" Relationship="Self.FK_POLIZA_CLIENTES" FromRole="CLIENTES" ToRole="POLIZA" />
+  </EntityType>
+  <EntityType Name="COBERTURA">
+    <Key>
+      <PropertyRef Name="ID_COBERTURA" />
+    </Key>
+    <Property Name="ID_COBERTURA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="POLIZA" Relationship="Self.FK_POLIZA_COBERTURA" FromRole="COBERTURA" ToRole="POLIZA" />
+  </EntityType>
+  <EntityType Name="POLIZA">
+    <Key>
+      <PropertyRef Name="ID_POLIZA" />
+    </Key>
+    <Property Name="ID_POLIZA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_CLIENTE" Type="Int32" Nullable="false" />
+    <Property Name="FK_AUTO" Type="Int32" Nullable="false" />
+    <Property Name="DANIOS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SGM" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="VIDA" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="FECHA_INICIO" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FECHA_VIGENCIA" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="COSTO" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="PORC_COASEGURADO" Type="Decimal" Precision="1" Scale="1" Nullable="false" />
+    <Property Name="PORC_DEDUCIBLE" Type="Decimal" Precision="1" Scale="1" Nullable="false" />
+    <Property Name="FK_COBERTURA" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AUTOS" Relationship="Self.FK_POLIZA_AUTOS" FromRole="POLIZA" ToRole="AUTOS" />
+    <NavigationProperty Name="CLIENTES" Relationship="Self.FK_POLIZA_CLIENTES" FromRole="POLIZA" ToRole="CLIENTES" />
+    <NavigationProperty Name="COBERTURA" Relationship="Self.FK_POLIZA_COBERTURA" FromRole="POLIZA" ToRole="COBERTURA" />
+  </EntityType>
+  <EntityType Name="VistaUnion">
+    <Key>
+      <PropertyRef Name="ID_POLIZA" />
+      <PropertyRef Name="NOMBRE" />
+      <PropertyRef Name="APE_PATERNO" />
+      <PropertyRef Name="APE_MATERNO" />
+      <PropertyRef Name="MARCA" />
+      <PropertyRef Name="MODELO" />
+      <PropertyRef Name="ANIO" />
+      <PropertyRef Name="DANIOS" />
+      <PropertyRef Name="SGM" />
+      <PropertyRef Name="VIDA" />
+      <PropertyRef Name="FECHA_INICIO" />
+      <PropertyRef Name="FECHA_VIGENCIA" />
+      <PropertyRef Name="COSTO" />
+      <PropertyRef Name="PORC_COASEGURADO" />
+      <PropertyRef Name="PORC_DEDUCIBLE" />
+      <PropertyRef Name="Expr1" />
+    </Key>
+    <Property Name="ID_POLIZA" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="APE_PATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="APE_MATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MARCA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MODELO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ANIO" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DANIOS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SGM" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="VIDA" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="FECHA_INICIO" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FECHA_VIGENCIA" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="COSTO" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="PORC_COASEGURADO" Type="Decimal" Precision="1" Scale="1" Nullable="false" />
+    <Property Name="PORC_DEDUCIBLE" Type="Decimal" Precision="1" Scale="1" Nullable="false" />
+    <Property Name="Expr1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_POLIZA_AUTOS">
+    <End Role="AUTOS" Type="Self.AUTOS" Multiplicity="1" />
+    <End Role="POLIZA" Type="Self.POLIZA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AUTOS">
+        <PropertyRef Name="ID_AUTO" />
+      </Principal>
+      <Dependent Role="POLIZA">
+        <PropertyRef Name="FK_AUTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_POLIZA_CLIENTES">
+    <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="1" />
+    <End Role="POLIZA" Type="Self.POLIZA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENTES">
+        <PropertyRef Name="ID_CLIENTE" />
+      </Principal>
+      <Dependent Role="POLIZA">
+        <PropertyRef Name="FK_CLIENTE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_POLIZA_COBERTURA">
+    <End Role="COBERTURA" Type="Self.COBERTURA" Multiplicity="1" />
+    <End Role="POLIZA" Type="Self.POLIZA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COBERTURA">
+        <PropertyRef Name="ID_COBERTURA" />
+      </Principal>
+      <Dependent Role="POLIZA">
+        <PropertyRef Name="FK_COBERTURA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CRUDEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AUTOS" EntityType="Self.AUTOS" />
+    <EntitySet Name="CLIENTES" EntityType="Self.CLIENTES" />
+    <EntitySet Name="COBERTURA" EntityType="Self.COBERTURA" />
+    <EntitySet Name="POLIZA" EntityType="Self.POLIZA" />
+    <EntitySet Name="VistaUnion" EntityType="Self.VistaUnion" />
+    <AssociationSet Name="FK_POLIZA_AUTOS" Association="Self.FK_POLIZA_AUTOS">
+      <End Role="AUTOS" EntitySet="AUTOS" />
+      <End Role="POLIZA" EntitySet="POLIZA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_POLIZA_CLIENTES" Association="Self.FK_POLIZA_CLIENTES">
+      <End Role="CLIENTES" EntitySet="CLIENTES" />
+      <End Role="POLIZA" EntitySet="POLIZA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_POLIZA_COBERTURA" Association="Self.FK_POLIZA_COBERTURA">
+      <End Role="COBERTURA" EntitySet="COBERTURA" />
+      <End Role="POLIZA" EntitySet="POLIZA" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

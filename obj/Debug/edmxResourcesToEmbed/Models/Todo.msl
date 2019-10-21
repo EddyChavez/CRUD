@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CRUDModelStoreContainer" CdmEntityContainer="CRUDEntities1">
+    <EntitySetMapping Name="AUTOS">
+      <EntityTypeMapping TypeName="CRUDModel.AUTO">
+        <MappingFragment StoreEntitySet="AUTOS">
+          <ScalarProperty Name="ID_AUTO" ColumnName="ID_AUTO" />
+          <ScalarProperty Name="MARCA" ColumnName="MARCA" />
+          <ScalarProperty Name="MODELO" ColumnName="MODELO" />
+          <ScalarProperty Name="ANIO" ColumnName="ANIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CLIENTES">
+      <EntityTypeMapping TypeName="CRUDModel.CLIENTE">
+        <MappingFragment StoreEntitySet="CLIENTES">
+          <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="APE_PATERNO" ColumnName="APE_PATERNO" />
+          <ScalarProperty Name="APE_MATERNO" ColumnName="APE_MATERNO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COBERTURAs">
+      <EntityTypeMapping TypeName="CRUDModel.COBERTURA">
+        <MappingFragment StoreEntitySet="COBERTURA">
+          <ScalarProperty Name="ID_COBERTURA" ColumnName="ID_COBERTURA" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="POLIZAs">
+      <EntityTypeMapping TypeName="CRUDModel.POLIZA">
+        <MappingFragment StoreEntitySet="POLIZA">
+          <ScalarProperty Name="ID_POLIZA" ColumnName="ID_POLIZA" />
+          <ScalarProperty Name="FK_CLIENTE" ColumnName="FK_CLIENTE" />
+          <ScalarProperty Name="FK_AUTO" ColumnName="FK_AUTO" />
+          <ScalarProperty Name="DANIOS" ColumnName="DANIOS" />
+          <ScalarProperty Name="SGM" ColumnName="SGM" />
+          <ScalarProperty Name="VIDA" ColumnName="VIDA" />
+          <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
+          <ScalarProperty Name="FECHA_VIGENCIA" ColumnName="FECHA_VIGENCIA" />
+          <ScalarProperty Name="COSTO" ColumnName="COSTO" />
+          <ScalarProperty Name="PORC_COASEGURADO" ColumnName="PORC_COASEGURADO" />
+          <ScalarProperty Name="PORC_DEDUCIBLE" ColumnName="PORC_DEDUCIBLE" />
+          <ScalarProperty Name="FK_COBERTURA" ColumnName="FK_COBERTURA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
